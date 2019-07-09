@@ -1,24 +1,24 @@
 import axios from 'axios'
 
-export const FETCH_COMMENTS_PENDING = "FETCH_COMMENTS_PENDING"
-export const FETCH_COMMENTS_SUCCESS = "FETCH_COMMENTS_SUCCESS"
-export const FETCH_COMMENTS_FAILED = "FETCH_COMMENTS_FAILED"
+export const FETCH_COMMENTS_PENDING = 'FETCH_COMMENTS_PENDING'
+export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS'
+export const FETCH_COMMENTS_FAILED = 'FETCH_COMMENTS_FAILED'
 
-export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS"
-export const ADD_COMMENT_FAILED = "ADD_COMMENT_FAILED"
+export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS'
+export const ADD_COMMENT_FAILED = 'ADD_COMMENT_FAILED'
 
 export const fetchComments = () => {
   return async dispatch => {
-    try{
+    try {
       dispatch({
         type: FETCH_COMMENTS_PENDING
       })
-      let comments = await axios.get("http://localhost:8082/api/comments")
+      let comments = await axios.get('http://localhost:8082/api/comments')
       dispatch({
         type: FETCH_COMMENTS_SUCCESS,
         payload: comments
       })
-    } catch(err) {
+    } catch (err) {
       dispatch({
         type: FETCH_COMMENTS_FAILED,
         payload: err
@@ -34,7 +34,10 @@ export const addComment = (comment, postId) => {
   }
   return async dispatch => {
     try {
-      let response = await axios.post(`http://localhost:8082/api/comments`, data)
+      let response = await axios.post(
+        `http://localhost:8082/api/comments`,
+        data
+      )
       let newComment = response.data
       dispatch({
         type: ADD_COMMENT_SUCCESS,

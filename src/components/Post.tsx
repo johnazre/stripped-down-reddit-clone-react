@@ -1,11 +1,22 @@
 import React from 'react'
-import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle } from 'reactstrap';
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle
+} from 'reactstrap'
 import CommentsList from './CommentsList'
-import CommentInputField from './CommentInputField';
+import CommentInputField from './CommentInputField'
+import { IPost } from '../redux/types'
 
-const Post = ({post}) => {
-  let {img_url, title, author, content, id, votes, createdAt} = post
+interface PostProps {
+  post: IPost
+}
+
+const Post = (props: PostProps) => {
+  let { img_url, title, author, content, id } = props.post
   return (
     <div>
       <Card>

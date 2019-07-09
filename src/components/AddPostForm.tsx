@@ -1,17 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component, FormEvent } from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
-import { addPost } from '../redux/actions/posts'
+import { addPost } from '../store/posts/actions'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
-class AddPostForm extends Component {
+interface APFState {
+  title: string
+  content: string
+  author: string
+  img_url: string
+}
+
+interface APFProps {
+  addPost(newPost: APFState): void
+}
+
+class AddPostForm extends Component<APFProps, APFState> {
   state = {
     title: '',
     content: '',
     author: '',
     img_url: ''
   }
-  handleSubmit = e => {
+  handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     this.props.addPost(this.state)
   }

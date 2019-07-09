@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import posts from './reducers/posts'
-import comments from './reducers/comments'
+import posts from './posts/reducer'
+import comments from './comments/reducer'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
@@ -9,4 +9,4 @@ let rootReducer = combineReducers({
   comments
 })
 
-export default () => createStore(rootReducer, applyMiddleware(thunk, logger))
+export default createStore(rootReducer, applyMiddleware(thunk, logger))

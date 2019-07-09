@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import Post from './Post'
 import { connect } from 'react-redux'
 import { Form, FormGroup, Label, Input } from 'reactstrap'
+import { IPost, AppState } from '../redux/types'
 
-class PostList extends React.Component {
+interface PostListProps {
+  posts: IPost[]
+}
+
+interface PostListState {
+  filterPhrase: string
+}
+
+class PostList extends React.Component<PostListProps, PostListState> {
   state = {
     filterPhrase: ''
   }
-  handleChange = event => {
+  handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ filterPhrase: event.target.value })
   }
   render() {
     const listOfPosts = this.props.posts
-      .filter(post => post.title.includes(this.state.filterPhrase))
-      .map(post => <Post key={post.id} post={post} />)
+      .filter((post: IPost) => post.title.includes(this.state.filterPhrase))
+      .map((post: IPost) => <Post key={post.id} post={post} />)
     return (
       <div>
         <Form style={{ padding: 10 }} inline>
@@ -34,7 +43,7 @@ class PostList extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppState) => ({
   posts: state.posts
 })
 

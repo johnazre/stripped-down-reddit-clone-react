@@ -1,13 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component, ChangeEvent } from 'react'
 import { connect } from 'react-redux'
-import { addComment } from '../redux/actions/comments'
+import { addComment } from '../store/comments/actions'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
-class CommentInputField extends Component {
+interface CIFProps {
+  postId?: number
+  addComment(newComment: string, postId?: number): void
+}
+
+interface CIFState {
+  newComment: string
+}
+
+class CommentInputField extends Component<CIFProps, CIFState> {
   state = {
     newComment: ''
   }
-  handleChange = event => {
+  handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ newComment: event.target.value })
   }
   render() {
