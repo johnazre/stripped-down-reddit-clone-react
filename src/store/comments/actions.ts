@@ -1,13 +1,21 @@
 import axios from 'axios'
+import { Action } from 'redux'
+import { ThunkAction } from 'redux-thunk'
+import { AppState } from '../../store'
+import {
+  FETCH_COMMENTS_PENDING,
+  FETCH_COMMENTS_SUCCESS,
+  FETCH_COMMENTS_FAILED,
+  ADD_COMMENT_SUCCESS,
+  ADD_COMMENT_FAILED
+} from './types'
 
-export const FETCH_COMMENTS_PENDING = 'FETCH_COMMENTS_PENDING'
-export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS'
-export const FETCH_COMMENTS_FAILED = 'FETCH_COMMENTS_FAILED'
-
-export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS'
-export const ADD_COMMENT_FAILED = 'ADD_COMMENT_FAILED'
-
-export const fetchComments = () => {
+export const fetchComments = (): ThunkAction<
+  void,
+  AppState,
+  null,
+  Action<string>
+> => {
   return async dispatch => {
     try {
       dispatch({
@@ -16,7 +24,7 @@ export const fetchComments = () => {
       let comments = await axios.get('http://localhost:8082/api/comments')
       dispatch({
         type: FETCH_COMMENTS_SUCCESS,
-        payload: comments
+        payload: comments.data
       })
     } catch (err) {
       dispatch({
@@ -27,7 +35,10 @@ export const fetchComments = () => {
   }
 }
 
-export const addComment = (comment, postId) => {
+export const addComment = (
+  comment: string,
+  postId: number
+): ThunkAction<void, AppState, null, Action<string>> => {
   let data = {
     post_id: postId,
     content: comment

@@ -9,7 +9,7 @@ import {
 } from 'reactstrap'
 import CommentsList from './CommentsList'
 import CommentInputField from './CommentInputField'
-import { IPost } from '../redux/types'
+import { IPost } from '../store/posts/types'
 
 interface PostProps {
   post: IPost

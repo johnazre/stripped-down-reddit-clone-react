@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Comment from './Comment'
-import { IComment, AppState } from '../redux/types'
+import { IComment } from '../store/comments/types'
+import { AppState } from '../store'
 
 interface CLProps {
   comments: IComment[]

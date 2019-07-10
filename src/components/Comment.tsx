@@ -1,5 +1,5 @@
 import React from 'react'
-import { IComment } from '../redux/types'
+import { IComment } from '../store/comments/types'
 
 interface CommentProps {
   comment: IComment

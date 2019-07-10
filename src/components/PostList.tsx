@@ -2,7 +2,8 @@ import React, { ChangeEvent } from 'react'
 import Post from './Post'
 import { connect } from 'react-redux'
 import { Form, FormGroup, Label, Input } from 'reactstrap'
-import { IPost, AppState } from '../redux/types'
+import { IPost } from '../store/posts/types'
+import { AppState } from '../store'
 
 interface PostListProps {
   posts: IPost[]
@@ -20,6 +21,7 @@ class PostList extends React.Component<PostListProps, PostListState> {
     this.setState({ filterPhrase: event.target.value })
   }
   render() {
+    console.log('posts in pl', this.props.posts)
     const listOfPosts = this.props.posts
       .filter((post: IPost) => post.title.includes(this.state.filterPhrase))
       .map((post: IPost) => <Post key={post.id} post={post} />)

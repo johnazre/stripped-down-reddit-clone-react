@@ -3,17 +3,19 @@ import {
   FETCH_COMMENTS_SUCCESS,
   FETCH_COMMENTS_FAILED,
   ADD_COMMENT_SUCCESS,
-  ADD_COMMENT_FAILED
-} from '../actions/comments'
+  ADD_COMMENT_FAILED,
+  CommentActionTypes
+} from './types'
+import { IComment } from './types'
 
-let initialState = []
+let initialState: IComment[] = []
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: CommentActionTypes) => {
   switch (action.type) {
     case FETCH_COMMENTS_PENDING:
       return state
     case FETCH_COMMENTS_SUCCESS:
-      return [...action.payload.data]
+      return [...action.payload]
     case FETCH_COMMENTS_FAILED:
       return action.payload
     case ADD_COMMENT_SUCCESS:
