@@ -1,50 +1,36 @@
-import React, { Component, ChangeEvent } from 'react'
-import { connect } from 'react-redux'
+import React, { useState, ChangeEvent, FormEvent } from 'react'
+import { useDispatch } from 'react-redux'
 import { addComment } from '../store/comments/actions'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
 interface CIFProps {
   postId?: number
-  addComment(newComment: string, postId?: number): void
 }
 
-interface CIFState {
-  newComment: string
+const CommentInputField = (props: CIFProps) => {
+  const [newComment, setNewComment] = useState('')
+  const dispatch = useDispatch()
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    setNewComment(event.target.value)
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    dispatch(addComment(newComment, props.postId))
+  }
+
+  return (
+    <Form style={{ padding: 10 }} inline onSubmit={handleSubmit}>
+      <FormGroup>
+        <Label style={{ marginRight: 5, fontSize: 16 }}>
+          Add comment here:
+        </Label>
+        <Input type="text" value={newComment} onChange={handleChange} />
+      </FormGroup>
+      <Button type="submit">Submit</Button>
+    </Form>
+  )
 }
 
-class CommentInputField extends Component<CIFProps, CIFState> {
-  state = {
-    newComment: ''
-  }
-  handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ newComment: event.target.value })
-  }
-  render() {
-    return (
-      <Form style={{ padding: 10 }} inline>
-        <FormGroup>
-          <Label style={{ marginRight: 5, fontSize: 16 }}>
-            Add comment here:
-          </Label>
-          <Input
-            type="text"
-            value={this.state.newComment}
-            onChange={this.handleChange}
-          />
-        </FormGroup>
-        <Button
-          onClick={() =>
-            this.props.addComment(this.state.newComment, this.props.postId)
-          }
-        >
-          Submit
-        </Button>
-      </Form>
-    )
-  }
-}
-
-export default connect(
-  null,
-  { addComment }
-)(CommentInputField)
+export default CommentInputField

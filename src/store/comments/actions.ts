@@ -37,7 +37,7 @@ export const fetchComments = (): ThunkAction<
 
 export const addComment = (
   comment: string,
-  postId: number
+  postId?: number
 ): ThunkAction<void, AppState, null, Action<string>> => {
   let data = {
     post_id: postId,
