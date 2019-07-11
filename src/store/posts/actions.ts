@@ -18,7 +18,6 @@ export const fetchPosts = (): ThunkAction<
   Action<string>
 > => {
   return async dispatch => {
-    console.log('hhhhh')
     try {
       dispatch({
         type: FETCH_POSTS_PENDING

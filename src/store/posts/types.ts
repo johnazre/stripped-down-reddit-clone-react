@@ -32,7 +32,7 @@ interface FetchPostsFailedAction {
 // Add Post Actions
 interface AddPostSuccessAction {
   type: typeof ADD_POST_SUCCESS
-  payload: IPost[]
+  payload: IPost
 }
 
 interface AddPostFailedAction {

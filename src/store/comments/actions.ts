@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
-import { AppState } from '../../store'
+import { AppState } from '..'
 import {
   FETCH_COMMENTS_PENDING,
   FETCH_COMMENTS_SUCCESS,

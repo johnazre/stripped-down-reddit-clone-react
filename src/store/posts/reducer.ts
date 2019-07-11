@@ -20,7 +20,6 @@ export default (state = initialState, action: PostActionTypes) => {
     case FETCH_POSTS_FAILED:
       return action.payload
     case ADD_POST_SUCCESS:
-      console.log('action payload', action.payload)
       return [...state, action.payload]
     case ADD_POST_FAILED:
       return action.payload
