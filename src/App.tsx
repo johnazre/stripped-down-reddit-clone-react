@@ -29,6 +29,7 @@ const App = (props: AppProps) => {
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/posts" component={Main} />
+                <Route path="/posts/:guid/" component={Main} />
               </Switch>
             </Col>
           </Row>
